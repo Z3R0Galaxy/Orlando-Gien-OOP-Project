@@ -172,3 +172,92 @@ The design makes the program easy to understand, test, and maintain. It also all
 | + show_menu()                |
 +------------------------------+
 ```
+
+# Use Cases — Bank App
+
+## Use Case 1: Create New Bank Account
+
+- **Actor**: User  
+- **Preconditions**:  
+  - User is not currently logged in  
+  - `bank.csv` file exists or is initialized  
+
+- **Main Flow**:  
+  1. User selects "Create Account" from the main menu  
+  2. System prompts for a username  
+  3. User enters a unique username  
+  4. System generates a unique bank number  
+  5. System creates a new `UserAccount` object  
+  6. System adds the account to `BankDatabase` and saves to `bank.csv`  
+  7. User is logged in automatically  
+
+- **Postconditions**:  
+  - A new user account is created and stored persistently  
+  - User becomes the current active session  
+
+---
+
+## Use Case 2: Log In to Existing Account
+
+- **Actor**: User  
+- **Preconditions**:  
+  - At least one account exists in `bank.csv`  
+
+- **Main Flow**:  
+  1. User selects "Log In" from the main menu  
+  2. System prompts for username and bank number  
+  3. User inputs credentials  
+  4. System authenticates using `BankDatabase.authenticate()`  
+  5. If correct, user is logged in and `current_user` is set  
+
+- **Alternate Flow**:  
+  - If credentials are invalid, system shows an error and asks to retry  
+
+- **Postconditions**:  
+  - User is logged in and can perform account actions  
+
+---
+
+## Use Case 3: Deposit Funds
+
+- **Actor**: Logged-in User  
+- **Preconditions**:  
+  - User must be logged in  
+  - Account must exist in `BankDatabase`  
+
+- **Main Flow**:  
+  1. User selects "Deposit" from the menu  
+  2. System prompts for amount  
+  3. User enters a positive float value  
+  4. System calls `deposit(amount)` on `current_user`  
+  5. Updated balance is saved to `bank.csv`  
+
+- **Postconditions**:  
+  - Account balance is increased  
+  - Change is saved to persistent storage  
+
+---
+
+## Use Case 4: Withdraw Funds
+
+- **Actor**: Logged-in User  
+- **Preconditions**:  
+  - User must be logged in  
+  - Account must have sufficient funds  
+
+- **Main Flow**:  
+  1. User selects "Withdraw" from the menu  
+  2. System prompts for amount  
+  3. User enters a positive float value  
+  4. System checks if balance is sufficient  
+  5. If yes, calls `withdraw(amount)` on `current_user`  
+  6. Updated balance is saved to `bank.csv`  
+
+- **Alternate Flow**:  
+  - If funds are insufficient, system shows error and cancels the transaction  
+
+- **Postconditions**:  
+  - If successful, balance is reduced and saved  
+  - If not, balance remains unchanged  
+
+---
