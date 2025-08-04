@@ -261,3 +261,10 @@ The design makes the program easy to understand, test, and maintain. It also all
   - If not, balance remains unchanged  
 
 ---
+
+## Resources used
+- AI assistant (ChatGPT) used to:
+    - Create User Stories and Cases
+    - Format Class diagrams for Md
+- GitBook Module 220 used for:
+    - Formatting inspiration 
