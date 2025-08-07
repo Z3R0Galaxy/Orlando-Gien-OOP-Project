@@ -1,6 +1,6 @@
 import csv
 import random
-from user_account import UserAccount
+from backend.user_account import UserAccount
 
 class BankDatabase:
     def __init__(self):
